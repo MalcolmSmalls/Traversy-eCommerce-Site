@@ -1,0 +1,22 @@
+{
+  "name": "traversy-ecommerce-site",
+  "version": "1.0.0",
+  "description": "mern shopping app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MalcolmSmalls/Traversy-eCommerce-Site.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MalcolmSmalls/Traversy-eCommerce-Site/issues"
+  },
+  "homepage": "https://github.com/MalcolmSmalls/Traversy-eCommerce-Site#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
