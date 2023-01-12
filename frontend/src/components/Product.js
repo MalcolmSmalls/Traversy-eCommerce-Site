@@ -1,6 +1,7 @@
 import React from "react"
 import { Card, NavItem } from "react-bootstrap"
 import products from "../products"
+import Rating from "./Rating"
 
 export default function Product (props) {
     return (
@@ -16,7 +17,8 @@ export default function Product (props) {
 
                 <Card.Text as="div">
                     <div className = "my-3">
-                        {props.item.rating} from {props.item.numReviews} reviews.
+                        <Rating rating = {props.item.rating} numReviews = {props.item.numReviews}/>
+
                     </div>
                 </Card.Text>
 
@@ -27,4 +29,8 @@ export default function Product (props) {
 
         </Card>
     )
+}
+
+Rating.defaultProps = {
+    color: '#f8e825'
 }
