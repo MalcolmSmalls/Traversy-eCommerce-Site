@@ -1,7 +1,8 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import data from './data/products.js'
 import connectDB from "./config/db.js"
+import productRoutes from './routes/productRoutes.js'
+
 
 
 const app = express()
@@ -13,15 +14,8 @@ app.get('/', (req, res) => {
     res.send('API is working')
 })
 
-app.get('/api/products', (req, res) => {
-    res.json(data)
-})
+app.use('/api/products', productRoutes)
 
-
-app.get('/api/products/:id', (req, res) => {
-    const item = data.find(item => item._id === req.params.id)
-    res.json(item)
-})
 
 const PORT = process.env.PORT || 5000
 

@@ -1,4 +1,3 @@
-import { LogExit } from 'concurrently'
 import mongoose from 'mongoose'
 
 const connectDB = async () => {
