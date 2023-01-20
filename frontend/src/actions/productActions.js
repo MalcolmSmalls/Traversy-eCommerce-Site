@@ -1,5 +1,7 @@
 import { PRODUCT_LIST_FAIL, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS} from "../constants/productConstants"
+import { PRODUCT_FAIL, PRODUCT_REQUEST, PRODUCT_SUCCESS } from "../constants/productConstants"
 import axios from 'axios'
+import { useParams } from "react-router-dom"
 
 export const listProducts = () => async (dispatch) => {
 	try {
@@ -20,4 +22,25 @@ export const listProducts = () => async (dispatch) => {
 
 	}
 
+}
+
+
+export const listDetails = () => async (dispatch) => {
+    try { 
+        dispatch({ type: PRODUCT_REQUEST })
+        const { id } = useParams
+        const { data } = await axios.get(`/api/products/${id}`)
+
+        dispatch({
+            type: PRODUCT_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        })
+
+    }
 }
