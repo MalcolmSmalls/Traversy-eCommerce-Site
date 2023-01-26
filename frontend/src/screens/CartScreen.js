@@ -3,7 +3,7 @@ import { Link, useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import Message from '../components/Message'
-import { addToCart } from '../actions/cartActions'
+import { addToCart, removeFromCart } from '../actions/cartActions'
 
 export default function CartScreen() {
   const productId = useParams()
@@ -21,7 +21,11 @@ export default function CartScreen() {
   const { cartItems } = cart
 
   function removeFromCartHandler(id) {
-    console.log(id)
+    dispatch(removeFromCart(id))
+  }
+
+  function checkoutHandler() {
+    navigate('/login?redirect=shipping')
   }
   return (
     <Row>
@@ -73,15 +77,37 @@ export default function CartScreen() {
                     </Button>
                   </Col>
                 </Row>
-
-                <Row></Row>
               </ListGroup.Item>
             ))}
           </ListGroup>
         )}
       </Col>
-      <Col md={2}></Col>
-      <Col md={2}></Col>
+      <Col md={4}>
+        <Card>
+          <ListGroup variant='flush'>
+            <ListGroup.Item>
+              <h2>
+                Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
+                items
+              </h2>
+              $
+              {cartItems
+                .reduce((acc, item) => acc + item.qty * item.price, 0)
+                .toFixed(2)}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <Button
+                type='button'
+                className='btn-block'
+                disabled={cartItems.length === 0}
+                onClick={checkoutHandler}
+              >
+                Proceed To Checkout
+              </Button>
+            </ListGroup.Item>
+          </ListGroup>
+        </Card>
+      </Col>
     </Row>
   )
 }
